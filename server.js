@@ -7,6 +7,7 @@ let mongoose = require('mongoose');
 let Songs=require('./models/songs');
 const  {File} = require("node-taglib-sharp");
 const Queue=require("./src/Queue");
+require('dotenv').config();
 
 
 //Conneting to database
@@ -47,7 +48,7 @@ app.get('/stream', function(req,res){
     writables.push(res);
 });
 
-const server=app.listen(process.env.PORT | 9000, ()=>{
+const server=app.listen(process.env.PORT || 9000, ()=>{
     console.log("Server Started");
 });// starting a server at port 9000 
 
