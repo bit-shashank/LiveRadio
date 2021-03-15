@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveRadio</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Live Radio Server</h1>
+    <audio  id="streamSong" controls autoplay>
+        <source src="/stream" type="audio/ogg">
+    </audio>
+
+    <a href="/song/upload">Upload New Song</a>
+
+    <!-- <script>
+        var aud = document.getElementById("streamSong");
+        aud.onpause = function() {
+            alert("Paused");
+        };
+    </script> -->
+</body>
+</html>
