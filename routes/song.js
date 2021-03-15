@@ -42,7 +42,7 @@ router.post("/upload",upload.single('song'),async (req,res)=>{
 
 router.get('/all',async (req,res)=>{
     let songs= await Song.find().sort({ _id: -1 });
-    res.send(songs);
+    res.render("allSongs",{songs:songs});
 })
 
 
