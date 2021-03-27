@@ -1,30 +1,29 @@
-const Song=require('../models/songs')
+const Song = require("../models/songs");
 
+class Queue {
+	constructor() {
+		this.songs = [];
+		this.currentSong = null;
+		this.currIndex = -1;
+	}
 
-class Queue{
-    constructor(){
-        this.songs=[];
-        this.currentSong=null;
-        this.currIndex=-1;
-    }
+	async loadSongs() {
+		this.songs = await Song.aggregate(
+            [ { $sample: { size: 5 } } ]
+         );
+         console.log("New Playlist");
+         console.log(this.songs);
+	}
 
-    async loadSongs(){
-        let allSongs= await Song.find().sort({ _id: -1 });
-        
-        if (this.songs.length != allSongs.length){
-            this.songs=allSongs;
-            this.currIndex=-1;
-            this.currentSong=null;
+	async nextSong() {
+		// await this.loadSongs();
+		this.currIndex = (this.currIndex + 1);
+        if (this.currIndex== this.songs.length){
+            await this.loadSongs();
+            this.currIndex=0;
         }
-        this.songs=allSongs;
-        console.log("Total Songs:"+this.songs.length);
-    }
-
-    async nextSong(){
-        // await this.loadSongs();
-        this.currIndex=(this.currIndex+1)%this.songs.length;
-        this.currentSong=this.songs[this.currIndex];
-    }
+		this.currentSong = this.songs[this.currIndex];
+	}
 }
 
-module.exports= Queue;
+module.exports = Queue;

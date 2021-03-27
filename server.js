@@ -54,11 +54,19 @@ const server=app.listen(process.env.PORT || 9000, ()=>{
 
 
 
+app.get('/next',(req,res)=>{
+    songQueue.nextSong();
+    playSong();
+});
+
+
+
+
+
 
 writables=[]
-
+let songQueue;
 startStreaming();
-
 
 async function startStreaming(){
     songQueue=new Queue();
@@ -86,14 +94,12 @@ function playSong(){
         }});
         
         musicStream.on('end',()=>{
-            songQueue.loadSongs();
             songQueue.nextSong();
             playSong();
         });
     }
     catch(e){
         console.log("Unable to play "+songPath);
-        songQueue.loadSongs();
         songQueue.nextSong();
         playSong();
     }
