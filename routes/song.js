@@ -17,7 +17,7 @@ router.get("/upload",(req,res)=>{
     res.render("upload");
 });
 
-router.post("/upload",upload.single('song'),async (req,res)=>{
+router.post("/upload", upload.single('song'),async (req,res)=>{
     const file=req.file;
 
     const song=new Song({
