@@ -2,7 +2,7 @@
   "name": "liveradio",
   "version": "1.0.0",
   "description": "A virtual live radio",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node" : "14.x"
   },
